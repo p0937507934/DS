@@ -36,9 +36,9 @@ class SingleLinkedList:
     def travel(self):
         cur = self.head
         while cur:
-            print(cur.val)
+            print(cur.val,end=" ")
             cur =  cur.next
-            
+        print("")
     
     def length(self):
         count = 0
@@ -46,31 +46,72 @@ class SingleLinkedList:
         while cur:
             count = count + 1
             cur = cur.next
-        print(count)
+        
         return count 
     
     def insert(self,pos,val):
-      
-            
+        if pos <= 0:
+            self.add(val)
+        elif pos >= self.length():
+            self.append(val)
+        else:
+            node = Node(val)
+            cur = self.head
+            while pos != 1:
+                cur = cur.next
+                pos = pos - 1
+            node.next = cur.next
+            cur.next = node
     def add(self,val):    
         node = Node(val)
         node.next = self.head
         self.head = node
-        
-            
-            
-        
+    def search(self,val):
+        cur = self.head
+        while cur:
+            if cur.val == val:
+                return True
+            cur = cur.next
+        return False
     
-s = SingleLinkedList()
-s.append(1)
-s.append(2)
-s.append(3)
-s.append(4)
-s.append(5)
-s.travel()
-s.length()
-                
+    def delete(self,val):
+        cur = self.head
+        if cur.val == val:
+            self.head = cur.next
+        else:
+            while cur.next:
+                if cur.next.val == val:
+                    cur.next = cur.next.next
+                    return True
+                else:
+                    cur = cur.next
+            return False
+
+
             
+            
+        
+if __name__ == "__main__":
+
+    s = SingleLinkedList()
+    s.append(1)
+    s.append(2)
+    s.append(3)
+    s.append(4)
+    s.append(5)
+    s.travel()
+
+    s.add(8)
+    s.add(9)
+    s.insert(2,7)
+    s.insert(9,7)
+    s.travel()
+    print(s.search(10))
+    s.delete(2)
+    s.delete(9)
+    s.delete(7)
+    s.delete(7)
+    s.travel()
             
             
             
