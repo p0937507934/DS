@@ -24,6 +24,44 @@ class DoubleLinkedList(SingleLinkedList):
             n.next = self.head
             self.head.prev = n
             self.head = n
+    
+    def append(self,val):
+
+        node = Node(val)
+        if self.is_empty():
+            self.head = node
+        cur = self.head
+        while cur.next != None:
+            cur = cur.next
+        cur.next = node
+        node.prev = cur
+
+
+    def insert(self,pos,val):
+        """
+        插入指定位置
+        :params
+        pos:start from 0
+        val:Node val
+        """
+        if pos<=0:
+            self.add(val)
+        elif pos > (self.length - 1):
+            self.append(val)
+        else:
+            cur = self.head
+            while pos != 0:
+                pos = pos - 1
+                cur = cur.next
+            node = Node(val)
+            node.next = cur
+            node.prev = cur.prev
+            cur.prev.next = node
+            cur.prev = node
+        
+
+
+
         
 
 
